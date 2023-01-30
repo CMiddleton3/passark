@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Generate password
+python3 {{passark_path}}/passark.py -p "$@"
