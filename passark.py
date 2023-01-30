@@ -187,6 +187,7 @@ if __name__ == '__main__':
     group.add_argument('-s','--show-passwords',type=str,help='Display all Password Unique Keys Available',const=True,nargs='?',default=None)
     parser.add_argument('-j','--json',type=str,help='Display password in JSON format',const=True,nargs='?',default=None)
     parser.add_argument('-c','--csv',type=str,help='Display password in CSV format',const=True,nargs='?',default=None)
+    parser.add_argument('-t','--pipe',type=str,help='Password in format to Pipe into another command',const=True,nargs='?',default=None)
 
     group.add_argument('-r', '--reset', type=str, help='Reset Password Value', const=True, nargs='?', default=None)
 
@@ -206,7 +207,12 @@ if __name__ == '__main__':
     # Get a Password using it's UUID
     if args.get_password:
         password = get_password(args.get_password)
-        print(f'Password retrieved: {password}')
+        if args.json:
+            print(f'{{\"password\":\"{password}\"}}')
+        elif args.pipe or args.csv:
+            print(password)
+        else:
+            print(f'Password retrieved: {password}')
 
     # Show all Passwords UUID    
     if args.show_passwords:
