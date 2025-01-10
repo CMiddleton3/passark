@@ -1,2 +1,4 @@
 *.history
 *.vault
+__pycache__/*
+test/*
